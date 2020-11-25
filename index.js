@@ -25,7 +25,6 @@ app.use((req, res, next) => {
     });
 });
 
-
 require('./routes/auth')(app);
 
 const conectionOptions = { useNewUrlParser: true, useUnifiedTopology: true };

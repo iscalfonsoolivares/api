@@ -3,9 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const keys = require('../config/keys');
-// const auth = keys.auth || '';
-// const email = auth.split(':')[0];
-// const password = auth.split(':')[1];
 
 const User = mongoose.model('users');
 
@@ -13,12 +10,12 @@ module.exports = app => {
 
     app.post('/api/auth/login', (req, res) => {
 
-      User.findOne({ username: req.body.username }, function(err, user) {
+      User.findOne({ login: req.body.login }, function(err, user) {
 
-        if (err) { return res.status(403).json({ error : 'Invalid username or password'}); }
+        if (err) { return res.status(403).json({ error : 'Invalid login or password'}); }
 
         if (!user) {
-          return res.status(403).json({ error : 'Invalid username or password'});
+          return res.status(403).json({ error : 'Invalid login or password'});
         }
 
         user.validPassword(req.body.password).then( isValid => {
@@ -27,7 +24,9 @@ module.exports = app => {
 
               const userTokenData = {
                 id: user._id,
-                userName: user.username
+                app: user.app,
+                role: user.role,
+                login: user.login
               }
   
               const token = jwt.sign(userTokenData, keys.jwtKey);
@@ -35,11 +34,11 @@ module.exports = app => {
   
             }
 
-            return res.status(403).json({ error : 'Invalid username or password'});
+            return res.status(403).json({ error : 'Invalid login or password'});
 
           },
           () => {
-            return res.status(403).json({ error : 'Invalid username or password'});
+            return res.status(403).json({ error : 'Invalid login or password'});
           }          
         )
 
@@ -61,8 +60,8 @@ module.exports = app => {
               if(err){
                   return res.status(403).json({ error : err});
               }
-              const {id, userName } = decoded;
-              return res.json({ id, userName });
+              const {id, app, role, login } = decoded;
+              return res.json({ id, app, role, login });
 
           });
 
@@ -82,12 +81,14 @@ module.exports = app => {
         const passwordHash = await bcrypt.hash(req.body.password, salt);
 
         const userInfo = {
-          username: req.body.username,
+          login: req.body.login,
+          app: req.body.app,
+          role: req.body.role,
           password: passwordHash
         }
 
         User.create(userInfo).then( userDB => {
-          res.send({ username: userDB.username })
+          res.send({ login: userDB.login })
         }).catch( err => res.json( { err } ) );
 
       } catch (error) {
