@@ -5,13 +5,22 @@ const keys = require('./config/keys');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+const logger = require('morgan');
+
+
+// TODO: Add morgan as logger
 
 require('./models/User');
 
+app.use(logger('common'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {
+
+    // TODO: Add an env variable to allow several domains.
+    // Ref.: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-node-js
+
     res.header('Access-Control-Allow-Origin', '*');
 
     // authorized headers for preflight requests
