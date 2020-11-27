@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const logger = require('morgan');
 
-
-// TODO: Add morgan as logger
-
 require('./models/User');
 
 app.use(logger('common'));
