@@ -15,10 +15,17 @@ app.use(bodyParser.json())
 
 app.use((req, res, next) => {
 
-    // TODO: Add an env variable to allow several domains.
-    // Ref.: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-node-js
+    const devOrigins = ['http://127.0.0.1:8080', 'http://localhost:8080'];
+    const prodOrigins = ['https://app.aowebdev.com'];
+    
+    const allowedOrigins = process.env.NODE_ENV === 'development' ? devOrigins : prodOrigins ;
+    
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }    
 
-    res.header('Access-Control-Allow-Origin', '*');
+    //res.header('Access-Control-Allow-Origin', '*');
 
     // authorized headers for preflight requests
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
