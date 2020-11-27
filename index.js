@@ -9,6 +9,7 @@ const logger = require('morgan');
 
 require('./models/User');
 
+app.set('trust proxy', true);
 app.use(logger('common'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
