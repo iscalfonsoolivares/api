@@ -4,7 +4,6 @@ const port = process.env.PORT || 8080;
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const path = require('path');
 const logger = require('morgan');
 
 require('./models/User');
