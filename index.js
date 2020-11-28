@@ -8,11 +8,15 @@ const logger = require('morgan');
 
 require('./models/User');
 
+// Settings
+
 app.set('trust proxy', true);
+
+// Middleware
+
 app.use(logger('common'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
 app.use((req, res, next) => {
 
     const devOrigins = ['http://127.0.0.1:8080', 'http://localhost:8080'];
@@ -38,7 +42,10 @@ app.use((req, res, next) => {
     });
 });
 
+// Routes
+
 require('./routes/auth')(app);
+require('./routes/uploads')(app);
 
 const conectionOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose.Promise = global.Promise;
