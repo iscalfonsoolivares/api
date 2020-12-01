@@ -102,5 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
-#proyect secrets
+# Proyect secrets
 config/dev.js
+
+# Generated files
+public/css/*
+public/js/*

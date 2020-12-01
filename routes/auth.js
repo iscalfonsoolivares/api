@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const keys = require('../config/keys');
+const authenticate = require('../middleware/autenticate');
 
 const User = mongoose.model('users');
 
@@ -45,6 +46,17 @@ module.exports = app => {
       });
 
   });
+
+  app.post('/api/auth/authorize-cookie', authenticate, function(req, res) {
+    res.cookie('token', req.body.token, { expires: new Date(Date.now() + 36000), httpOnly: true });
+    res.status(200).send({ message: 'Cookie set!' })
+  });  
+
+  app.get('/api/auth/clear-cookie', function(req, res) {
+    res.clearCookie('token');
+    res.send(200, { message: 'Cookie destroyed!' });
+  });  
+
 
   app.post('/api/auth/user', (req, res) => {
 
