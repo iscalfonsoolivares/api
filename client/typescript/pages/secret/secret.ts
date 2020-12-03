@@ -1,9 +1,9 @@
 import Store from "../../utils/store";
-import { reducer } from "./home.reducer";
-import { UPDATE_TODOS, INIT_TODO_LIST } from "./home.actions";
-import { removeChildren, buildTodoList } from "./home.rendering";
+import { reducer } from "./secret.reducer";
+import { UPDATE_TODOS, INIT_TODO_LIST } from "./secret.actions";
+import { removeChildren, buildTodoList } from "./secret.rendering";
 
-export const home: () => void = () => {
+export const secret: () => void = () => {
 
   // using custom attributes will scale better than css classes/id's
   const numberOfTodos = document.querySelector("[data-js=number-of-todos]");

@@ -1,5 +1,5 @@
 import { router } from './utils/router';
-import { home } from './pages/home/home';
+import { secret } from './pages/secret/secret';
 
 // Main Function
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(): void {
   }
   console.log('# 1');
   // Executing route functions
-  router.add('/secret', home);
+  router.add('/secret', secret);
   // router.add('/index.html', home);
 
   router.run();
