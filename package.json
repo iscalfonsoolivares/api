@@ -14,6 +14,9 @@
     "build:sasscompress": "node-sass public/css/styles.prefixed.css public/css/styles.css --output-style compressed",
     "build:styles": "npm run build:sasscompile && npm run build:postcssprefix && npm run build:sasscompress",
     "dev": "concurrently npm:dev:*",
+    "devsrv": "npm run dev:server",
+    "devcss": "concurrently \"npm run dev:server\" \"npm run dev:sass\"",
+    "devjs": "concurrently \"npm run dev:server\" \"npm run dev:typescript\"",
     "build": "npm run build:typescript && npm run build:styles",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
