@@ -108,3 +108,5 @@ config/dev.js
 # Generated files
 public/css/*
 public/js/*
+
+.DS_Store
