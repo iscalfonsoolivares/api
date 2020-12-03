@@ -44,7 +44,7 @@ export const secret: () => void = () => {
   form.addEventListener("submit", async e => {
     e.preventDefault();
     const todo = (<HTMLInputElement>textField).value;
-    const res = await fetch("http://localhost:8080/todo", {
+    const res = await fetch("http://localhost:8080/api/todo", {
       method: "post",
       headers: {
         Accept: "application/json",

@@ -53,6 +53,7 @@ app.use((req, res, next) => {
 
 require('./routes/pages')(app);
 require('./routes/auth')(app);
+require('./routes/todo')(app);
 require('./routes/uploads')(app);
 
 // Error heandlears
