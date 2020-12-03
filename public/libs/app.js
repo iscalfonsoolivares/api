@@ -28,6 +28,7 @@ $('.btn-login').click(function() {
       },
       success: function() {
         console.log('Cookie received!');
+        window.location.replace("/secret");
       },
       error: function() {
         console.log('Problem with cookie');
