@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(): void {
   }
   console.log('# 1');
   // Executing route functions
-  router.add('/', home);
+  router.add('/secret', home);
   // router.add('/index.html', home);
 
   router.run();

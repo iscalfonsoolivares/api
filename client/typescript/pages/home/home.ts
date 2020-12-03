@@ -44,7 +44,7 @@ export const home: () => void = () => {
   form.addEventListener("submit", async e => {
     e.preventDefault();
     const todo = (<HTMLInputElement>textField).value;
-    const res = await fetch("http://localhost:3000/todo", {
+    const res = await fetch("http://localhost:8080/todo", {
       method: "post",
       headers: {
         Accept: "application/json",
